@@ -4,8 +4,8 @@ import requests
 # 取得session
 def get_session():
     data = dict(verifyKey='daisy')
-    url = 'http://39.105.216.234:8080/'
-    resp = requests.request('post',url+'verify', json=data)
+    url = 'http://127.0.0.1:8080/'
+    resp = requests.request('post',url+'verify', json=data,)
     print(resp.json())
     return resp.json()
 
@@ -24,9 +24,20 @@ def link_start(res):
 
 # 获取bot的群列表
 def get_list(session):
-    res = requests.request('get',f'http://127.0.0.1:8080/groupList?sessionKey={session}')
+    data = {
+  "sessionKey":f"{session}",
+  "target":312287061,
+  "messageChain":[
+    { "type":"Plain", "text":"芜湖！" },
+    { "type":"Plain", "text":"！" },
+
+  ]
+}
+    res = requests.request('post',f'http://127.0.0.1:8080/sendGroupMessage?', json=data)
     print(res.text)
 
+def send_message(session):
+    res = requests.request('post','')
 if __name__ == '__main__':
     session = link_start(res=get_session())
     get_list(session=session)
