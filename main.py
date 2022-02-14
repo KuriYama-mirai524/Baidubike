@@ -1,7 +1,7 @@
 import time
 
 import requests
-
+import spider
 
 # 接受消息
 def get_message():
@@ -13,6 +13,7 @@ def get_message():
             try:
                 try:
                     print(i1['messageChain'][1]['text'])
+
                 except:
                     print(i1['messageChain'][1]['imageId'])
             except:
