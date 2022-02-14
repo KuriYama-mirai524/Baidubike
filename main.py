@@ -5,6 +5,7 @@ import spider
 
 # 接受消息
 def get_message():
+
     msg = requests.request('get', url + f'/fetchMessage?sessionKey={session[0]}&count=10')
     if not bool(msg.json()['data']):
         pass
@@ -13,6 +14,20 @@ def get_message():
             try:
                 try:
                     print(i1['messageChain'][1]['text'])
+                    if '百度 ' in i1['messageChain'][1]['text']:
+                        ms = str(i1['messageChain'][1]['text'])
+                        print(ms.split('度')[1])
+                        base = spider.scrien(kw=ms.split('度')[1])
+                        print('1')
+                        group = {'sessionKey': session[0],
+                                 'group': '735863298',
+                                 "messageChain": [
+                                     {"type": "Image", "path": '/home/daisy/ceshi.png'}]
+                                 }
+                        print('2')
+                        response1 = requests.request('post', url + '/sendGroupMessage', json=group)
+                        print('2')
+                        print(response1.text)
 
                 except:
                     print(i1['messageChain'][1]['imageId'])
