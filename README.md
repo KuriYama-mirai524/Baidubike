@@ -16,5 +16,7 @@ windows用户请[查看](https://blog.csdn.net/shykevin/article/details/10880205
 
 For Linux: （安装较麻烦）
 1，将两个py文件(main.py和spider.py下载到你的linux服务器。
+
+
 2，
 
