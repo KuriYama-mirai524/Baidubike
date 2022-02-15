@@ -1,5 +1,11 @@
 # 及其简陋的百度插件
  
+ 需要用到mirai-http,在这之前请先阅读[mirai-http官方文档](https://github.com/project-mirai/mirai-api-http)
+ 
+ 
+ 
+ 
+ 
 For Windows:
 使用前请先安装Chrome，并且pip install selenium库
 
