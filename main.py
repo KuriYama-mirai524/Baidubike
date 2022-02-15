@@ -1,55 +1,74 @@
+# coding=utf-8
 import time
 
 import requests
 import spider
+import os
+import sys
+
+p = str(os.path.abspath(sys.argv[0]))
+imgpath = str(p.strip('main.py') + '临时图片.png').replace('\\', '/')
+print(imgpath)
+path = str(p.strip('main.py') + 'config.txt').replace('\\', '/')
+print(path)
+
+with open(path, 'r') as f:
+    data3 = f.readlines()
+    print(data3[0].split('\n')[0])
+
+groupn = str(data3[2].split(':')[1].split('\n')[0])
+print(groupn)
+
 
 # 接受消息
 def get_message():
-
     msg = requests.request('get', url + f'/fetchMessage?sessionKey={session[0]}&count=10')
     if not bool(msg.json()['data']):
         pass
     else:
-        for i1 in msg.json()['data']:
-            try:
+        groupid = msg.json()['data'][0]['sender']['group']['id']
+        if str(groupid) in groupn:
+            for i1 in msg.json()['data']:
                 try:
-                    print(i1['messageChain'][1]['text'])
-                    if '百度 ' in i1['messageChain'][1]['text']:
-                        requests.request('post')
-                        ms = str(i1['messageChain'][1]['text'])
-                        print(ms.split('度')[1])
-                        base = spider.scrien(kw=ms.split('度')[1])
-                        print('1')
-                        group = {'sessionKey': session[0],
-                                 'group': '735863298',
-                                 "messageChain": [
-                                     {"type": "Image", "path": '/home/daisy/img/img.png'}]
-                                 }
-                        print('2')
-                        response1 = requests.request('post', url + '/sendGroupMessage', json=group)
-                        print('2')
-                        print(response1.text)
+                    try:
+                        print(i1['messageChain'][1]['text'])
+                        if '百度 ' in i1['messageChain'][1]['text']:
+                            ms = str(i1['messageChain'][1]['text'])
+                            spider.scrien(kw=ms.split('度')[1], path=imgpath)
+                            group = {'sessionKey': session[0],
+                                     'group': groupn,
+                                     "messageChain": [
+                                         {"type": "Image", "path": imgpath}]
+                                     }
+                            print(group)
+                            response1 = requests.request('post', url + '/sendGroupMessage', json=group)
+                            print(response1.text)
 
+                    except:
+                        print(i1['messageChain'][1]['imageId'])
                 except:
-                    print(i1['messageChain'][1]['imageId'])
-            except:
-                pass
-
-
-
+                    pass
 
 
 session = []
 # 取得session
-data = dict(verifyKey='daisy')
-url = 'http://127.0.0.1:8080/'
-resp = requests.request('post', url + 'verify', json=data, )
+sessionkey = str(data3[1].split(':')[1])
+data = {
+    'verifyKey': sessionkey.split('\n')[0]
+}
+
+print(data3[1].split(':')[1])
+url = 'http://' + str(data3[0].split('\n')[0]).split('=')[1]
+print(url)
+resp = requests.request('post', url=url + '/verify', json=data)
+print(resp.text)
 session.append(resp.json()['session'])
 print('session获取成功', session[0])
 print('尝试连接中....')
 # 将获取的session与bot绑定
-data_session = dict(sessionKey=session[0], qq=2317387881)
-resp2 = requests.request('post', url + 'bind', json=data_session)
+data_session = dict(sessionKey=session[0], qq=data3[3].split(':')[1])
+print(data_session)
+resp2 = requests.request('post', url + '/bind', json=data_session)
 if 'success' in resp2.text:
     print('连接成功！')
 if '2' in resp2.text:
@@ -58,23 +77,19 @@ if '2' in resp2.text:
 resp3 = requests.request('get', url + f'/groupList?sessionKey={session[0]}')
 print('获取到', len(resp3.json()['data']), '个群')
 for i in resp3.json()['data']:
-    if '735863298' in str(i):
-        print('开始监听', i['name'], i['id'])
+    d = i['id']
 
-        while '735863298' in str(i):
+    if str(d) in groupn:
+        print('开始监听')
+
+        while str(d) in groupn:
             get_message()
-            time.sleep(2.5)
+            time.sleep(1.5)
             continue
-
-
-
-
-
-
-
+    else:
+        print('未检索到群号')
 
 # 释放session缓存（仅测试阶段使用）
-response = requests.request('post', url + 'release', json=data_session).text
+response = requests.request('post', url + '/release', json=data_session).text
 if 'success' in response:
     print('session释放成功')
-

@@ -1,3 +1,4 @@
+# coding=utf-8
 import requests
 from lxml import etree
 from selenium import webdriver
@@ -22,7 +23,7 @@ def get_msg(keyw):
 
 
 
-def scrien(kw):
+def scrien(kw, path):
     option = ChromeOptions()
     option.add_argument('--headless')
     option.add_argument('--no-sandbox')
@@ -32,8 +33,7 @@ def scrien(kw):
     web.set_window_size(1920, 1080)
     web.get('https://baike.baidu.com/item/'+kw)
     img = web.find_element(By.XPATH, '/html/body/div[3]/div[2]/div').screenshot_as_png
-    print('4')
-    with open('/home/daisy/img/img.png', 'wb+') as f:
+    with open(path, 'wb+') as f:
         f.write(img)
         print('搜索完成')
         return img
