@@ -1,5 +1,5 @@
 # 及其简陋的百度插件
-![V@A9E1N0GJM9`NZ_GLYMFZF](https://user-images.githubusercontent.com/93362741/153986127-919129ec-6787-4221-81b9-db489559ef54.png)
+![image](https://user-images.githubusercontent.com/93362741/154024768-676fc805-9255-4a86-88e4-10f4a48a78ce.png)
 
  
  需要用到mirai-http,在这之前请先阅读
@@ -24,6 +24,11 @@ windows用户请[查看](https://blog.csdn.net/shykevin/article/details/10880205
 
 
 然后双击运行main.py(在这之前请先[安装python](https://blog.csdn.net/qq_45502336/article/details/109531599?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164490905916780271543964%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=164490905916780271543964&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-109531599.first_rank_v2_pc_rank_v29&utm_term=%E5%AE%89%E8%A3%85python&spm=1018.2226.3001.4187))
+
+
+
+
+
 
 
 
