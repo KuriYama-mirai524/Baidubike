@@ -28,7 +28,7 @@ def scrien(kw):
     web.set_window_size(1920, 1080)
     web.get('https://baike.baidu.com/item/'+kw)
     img = web.find_element(By.XPATH, '/html/body/div[3]/div[2]/div/div[1]').screenshot_as_png
-    with open('E:/ceshi.png', 'wb+') as f:
+    with open('/home/daisy/img/img.png', 'wb+') as f:
         f.write(img)
         print('搜索完成')
         return img

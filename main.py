@@ -22,7 +22,7 @@ def get_message():
                         group = {'sessionKey': session[0],
                                  'group': '735863298',
                                  "messageChain": [
-                                     {"type": "Image", "path": '/home/daisy/ceshi.png'}]
+                                     {"type": "Image", "path": '/home/daisy/img/img.png'}]
                                  }
                         print('2')
                         response1 = requests.request('post', url + '/sendGroupMessage', json=group)
