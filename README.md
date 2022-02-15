@@ -2,7 +2,9 @@
 ![V@A9E1N0GJM9`NZ_GLYMFZF](https://user-images.githubusercontent.com/93362741/153986127-919129ec-6787-4221-81b9-db489559ef54.png)
 
  
- 需要用到mirai-http,在这之前请先阅读[mirai-http官方文档](https://github.com/project-mirai/mirai-api-http)
+ 需要用到mirai-http,在这之前请先阅读
+ 
+ [mirai-http官方文档](https://github.com/project-mirai/mirai-api-http)
  
  
  
