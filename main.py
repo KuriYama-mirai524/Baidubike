@@ -15,6 +15,7 @@ def get_message():
                 try:
                     print(i1['messageChain'][1]['text'])
                     if '百度 ' in i1['messageChain'][1]['text']:
+                        requests.request('post')
                         ms = str(i1['messageChain'][1]['text'])
                         print(ms.split('度')[1])
                         base = spider.scrien(kw=ms.split('度')[1])

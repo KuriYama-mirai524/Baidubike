@@ -4,8 +4,10 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver import ChromeOptions
 
-option = ChromeOptions()
-option.add_argument('--headless')
+# option = ChromeOptions()
+# option.add_argument('--headless')
+# option.add_argument('--no-sandbox')
+# option.add_argument('--disable-dev-shm-usage')
 
 
 
@@ -22,12 +24,15 @@ def get_msg(keyw):
 
 def scrien(kw):
     option = ChromeOptions()
-    print('正在截图中...')
     option.add_argument('--headless')
+    option.add_argument('--no-sandbox')
+    option.add_argument('--disable-dev-shm-usage')
     web = webdriver.Chrome(options=option)
+    print('正在截图中...')
     web.set_window_size(1920, 1080)
     web.get('https://baike.baidu.com/item/'+kw)
-    img = web.find_element(By.XPATH, '/html/body/div[3]/div[2]/div/div[1]').screenshot_as_png
+    img = web.find_element(By.XPATH, '/html/body/div[3]/div[2]/div').screenshot_as_png
+    print('4')
     with open('/home/daisy/img/img.png', 'wb+') as f:
         f.write(img)
         print('搜索完成')
