@@ -26,28 +26,31 @@ def get_message():
     if not bool(msg.json()['data']):
         pass
     else:
-        groupid = msg.json()['data'][0]['sender']['group']['id']
-        if str(groupid) in groupn:
-            for i1 in msg.json()['data']:
-                try:
+        try:
+            groupid = msg.json()['data'][0]['sender']['group']['id']
+            if str(groupid) in groupn:
+                for i1 in msg.json()['data']:
                     try:
-                        print(i1['messageChain'][1]['text'])
-                        if '百度 ' in i1['messageChain'][1]['text']:
-                            ms = str(i1['messageChain'][1]['text'])
-                            spider.scrien(kw=ms.split('度')[1], path=imgpath)
-                            group = {'sessionKey': session[0],
-                                     'group': groupn,
-                                     "messageChain": [
-                                         {"type": "Image", "path": imgpath}]
-                                     }
-                            print(group)
-                            response1 = requests.request('post', url + '/sendGroupMessage', json=group)
-                            print(response1.text)
+                        try:
+                            print(i1['messageChain'][1]['text'])
+                            if '百度 ' in i1['messageChain'][1]['text']:
+                                ms = str(i1['messageChain'][1]['text'])
+                                spider.scrien(kw=ms.split('度')[1], path=imgpath)
+                                group = {'sessionKey': session[0],
+                                         'group': str(groupid),
+                                         "messageChain": [
+                                             {"type": "Image", "path": imgpath}]
+                                         }
+                                print(group)
+                                response1 = requests.request('post', url + '/sendGroupMessage', json=group)
+                                print(response1.text)
 
+                        except:
+                            print(i1['messageChain'][1]['imageId'])
                     except:
-                        print(i1['messageChain'][1]['imageId'])
-                except:
-                    pass
+                        pass
+        except:
+            pass
 
 
 session = []
@@ -58,7 +61,10 @@ data = {
 }
 
 print(data3[1].split(':')[1])
-url = 'http://' + str(data3[0].split('\n')[0]).split('=')[1]
+try:
+    url = 'http://' + str(data3[0].split('\n')[0]).split('=')[1]
+except:
+    print('获取会话失败，请检查host是否填写正确')
 print(url)
 resp = requests.request('post', url=url + '/verify', json=data)
 print(resp.text)
