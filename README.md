@@ -1,4 +1,6 @@
 # 及其简陋的百度插件
+![V@A9E1N0GJM9`NZ_GLYMFZF](https://user-images.githubusercontent.com/93362741/153986127-919129ec-6787-4221-81b9-db489559ef54.png)
+
  
  需要用到mirai-http,在这之前请先阅读[mirai-http官方文档](https://github.com/project-mirai/mirai-api-http)
  
@@ -15,5 +17,4 @@ windows用户请[查看](https://blog.csdn.net/shykevin/article/details/10880205
 For Linux: （安装较麻烦）
 1，将两个py文件(main.py和spider.py下载到你的linux服务器。
 2，
-
 
