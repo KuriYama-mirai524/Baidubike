@@ -1,42 +1,33 @@
 # coding=utf-8
-import requests
-from lxml import etree
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver import ChromeOptions
 
-# option = ChromeOptions()
-# option.add_argument('--headless')
-# option.add_argument('--no-sandbox')
-# option.add_argument('--disable-dev-shm-usage')
-
-
-
-
-def get_msg(keyw):
-    url = 'https://zh.moegirl.org.cn/' + keyw
-    resp = requests.get(url)
-    html = etree.HTML(resp.text)
-    res = html.xpath('//*[@id="mw-content-text"]/div/div[3]/table/tbody/tr[1]/td/div/div[2]/div/div/div/a/@href')[0]
-    print('https://zh.moegirl.org.cn/' + res)
-    res2 = html.xpath('')
-
-
-
 def scrien(kw, path):
+    print('截图中....')
     option = ChromeOptions()
-    option.add_argument('--headless')
     option.add_argument('--no-sandbox')
-    option.add_argument('--disable-dev-shm-usage')
+    option.add_argument('--headless')
     web = webdriver.Chrome(options=option)
-    print('正在截图中...')
     web.set_window_size(1920, 1080)
-    web.get('https://baike.baidu.com/item/'+kw)
-    img = web.find_element(By.XPATH, '/html/body/div[3]/div[2]/div').screenshot_as_png
+    web.get('https://baike.baidu.com/item/' + str(kw))
+    r = [web.find_element(By.XPATH, '/html/body/div[1]'), web.find_element(By.XPATH, '/html/body/div[3]/div[1]/div'),
+         web.find_element(By.XPATH, '/html/body/div[3]/div[2]/div/div[2]/div[2]'),
+         web.find_element(By.XPATH, '/html/body/div[3]/div[2]/div/div[2]/div[3]'),
+         web.find_element(By.XPATH, '/html/body/div[3]/div[2]/div/div[2]/div[4]'),
+         web.find_element(By.XPATH, '/html/body/div[3]/div[2]/div/div[2]/div[5]'),
+         web.find_element(By.XPATH, '//*[@id="side_box_unionAd"]'), ]
+    js = "arguments[0].remove();"
+    for i in r:
+        try:
+            web.execute_script(js, i)
+        except:
+            pass
+    img = web.find_element(By.XPATH, '/html/body/div[2]/div[2]/div').screenshot_as_png
     with open(path, 'wb+') as f:
         f.write(img)
-        print('搜索完成')
-        return img
-
-
-
+        print('已保存截图,准备发送')
+    web.close()
+if __name__ == '__main__':
+    scrien(kw='栗山未来', path='/home/daisy/临时图片.png')
