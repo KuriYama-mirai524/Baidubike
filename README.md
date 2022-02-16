@@ -45,5 +45,5 @@ For Linux:(鸽了）
 
 
 linux可以正常使用，最初我也是为了在liunx服务器上用而写的，但是配置selenium实在太麻烦，需要的依赖也特别多，再加上报错五花八门，所以暂时不提供linux的使用方法(其实是自己讲不清楚)
-如果恰好配置了selenium并且安装了对应版本的chromedriver和chrome的，可以试着运行。
-
+如果恰好配置了selenium并且安装了对应版本的chromedriver和chrome的，可以下载![image](https://user-images.githubusercontent.com/93362741/154210203-f00d3260-9e88-40d7-8db2-ad012eb0bcbd.png)，配置config文件后尝试运行main.py文件
+。
