@@ -1,4 +1,4 @@
-# 及其简陋的百度插件
+# 极其简陋的百度插件
 ![image](https://user-images.githubusercontent.com/93362741/154024768-676fc805-9255-4a86-88e4-10f4a48a78ce.png)
 
  
